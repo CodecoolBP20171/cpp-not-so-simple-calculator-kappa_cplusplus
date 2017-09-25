@@ -1,6 +1,7 @@
 #ifndef CALCULATOR_TESTER_HPP
 #define CALCULATOR_TESTER_HPP
 #include "Calculator.h"
+using namespace std;
 
 class Tester {
 public:
@@ -41,7 +42,7 @@ private:
     void TestAddition()
     {
         Calculator c;
-        double result = c.evaluate("10+2");
+        double result = c.evaluate("10.2root2");
         checkResult(12, result);
     }
 
