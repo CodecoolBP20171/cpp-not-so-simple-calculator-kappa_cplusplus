@@ -6,17 +6,18 @@
 
 std::vector<std::string> list_of_oprs;
 
-double Calculator::evaluate(std::string math_problem) {
+double Calculator::evaluate(const char * math_problem) {
     char *p;
     std::cout << std::strtod(math_problem, &p) << std::endl;
 
 
     std::string my_char = get_next_operator(p);
     std::cout << my_char << std::endl;
-    if(my_char.length() != 0){
-        return evaluate(my_char);
-    }
-    return 0;
+    std::cout << "boop" << std:: endl;
+//    if(my_char.length() != 0){
+//        return evaluate(my_char);
+//    }
+//    return 0;
 }
 
 std::string Calculator::get_next_operator(char *part){

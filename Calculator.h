@@ -11,7 +11,7 @@
 class Calculator {
 
 public:
-    double evaluate(std::string *math_problem);
+    double evaluate(const char * string);
 
 private:
     std::vector<std::string> list_of_oprs;
