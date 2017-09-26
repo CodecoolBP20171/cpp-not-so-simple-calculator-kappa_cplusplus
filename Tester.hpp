@@ -14,7 +14,7 @@ public:
         TestMultiplication();
         TestDivision();
         TestFormulaWithSpaces();
-/*
+
         // Level 1
         TestRoot();
         TestPow();
@@ -23,7 +23,7 @@ public:
         TestComplicatedFormula_root();
         TestComplicatedFormula_rootAndPower();
         TestErroneousFormula_rootTypoNoBrackets();
-*/
+
 /*
         // Boss fight
         TestComplicatedFormula_brackets();
@@ -42,7 +42,7 @@ private:
     void TestAddition()
     {
         Calculator c;
-        double result = c.evaluate("10.2root2");
+        double result = c.evaluate("10+2");
         checkResult(12, result);
     }
 
