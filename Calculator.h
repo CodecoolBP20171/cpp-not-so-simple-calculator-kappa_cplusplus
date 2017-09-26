@@ -15,10 +15,13 @@ public:
     double evaluate(std::string math_problem);
 
 private:
+    std::string LIST_OF_VALID_OPERATORS[6];
     std::vector<std::string> list_of_oprs;
     std::vector<double> numbers;
     std::string  get_next_operator(std::string part);
+    bool are_operators_valid;
     void solve(std::string op);
+    bool checkOperators();
 
 };
 

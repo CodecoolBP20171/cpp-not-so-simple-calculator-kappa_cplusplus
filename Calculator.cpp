@@ -9,6 +9,8 @@
 
 std::vector<std::string> list_of_oprs;
 std::vector<double> numbers;
+std::string LIST_OF_VALID_OPERATORS[6] = {"root", "^", "/", "*", "-", "+"};
+bool are_operators_valid;
 
 double Calculator::evaluate(std::string math_problem) {
     math_problem.erase(std::remove_if(begin(math_problem), end(math_problem), isspace), math_problem.end());
@@ -22,6 +24,18 @@ double Calculator::evaluate(std::string math_problem) {
         math_problem = get_next_operator(math_problem);
     }
 
+    are_operators_valid = checkOperators();
+
+    if(are_operators_valid){
+        for (int i = 0; i < LIST_OF_VALID_OPERATORS->size(); ++i) {
+            solve(LIST_OF_VALID_OPERATORS[i]);
+        }
+        return numbers[0];
+    } else {
+        std::cout << "Problem contains invalid operator" << std::endl;
+        return 0;
+    }
+  /*
     for(const auto& e: list_of_oprs){
         std::cout << "operator(s): " << e << std::endl;
     }
@@ -64,6 +78,7 @@ double Calculator::evaluate(std::string math_problem) {
     }
 
     return numbers[0];
+    */
 }
 
 
@@ -108,3 +123,14 @@ void Calculator::solve(std::string op) {
         }
     }
 }
+
+bool Calculator::checkOperators(){
+    for (int i = 0; i < list_of_oprs.size() ; ++i) {
+        if(!(std::find(LIST_OF_VALID_OPERATORS[0], LIST_OF_VALID_OPERATORS[6],
+                       list_of_oprs[i]) != LIST_OF_VALID_OPERATORS[6])){
+            return false;
+        }
+    }
+    return true;
+}
+
