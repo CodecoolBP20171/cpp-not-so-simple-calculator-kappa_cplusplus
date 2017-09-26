@@ -83,8 +83,8 @@ private:
     void TestRoot()
     {
         Calculator c;
-        double result = c.evaluate("2root25");
-        checkResult(5, result);
+        double result = c.evaluate("3root125");
+        checkResult(5, result, 0.05); // cubic root needs a bit of a threshold...
     }
 
     void TestFractional()
