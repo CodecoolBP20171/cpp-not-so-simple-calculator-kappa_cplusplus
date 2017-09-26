@@ -7,16 +7,19 @@
 
 #include <iostream>
 #include <vector>
+#include <stack>
 
 class Calculator {
 
 public:
-    double evaluate(std::string *math_problem);
+    double evaluate(std::string math_problem);
 
 private:
     std::vector<std::string> list_of_oprs;
-    int numbers[];
-    std::string  get_next_operator(char *part);
+    std::vector<double> numbers;
+    std::string  get_next_operator(std::string part);
+    void solve(std::string op);
+
 };
 
 
