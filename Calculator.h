@@ -15,7 +15,7 @@ public:
 
 private:
     std::vector<std::string> list_of_oprs;
-    int numbers[];
+    std::vector<std::int> numbers;
     std::string  get_next_operator(char *part);
 };
 
