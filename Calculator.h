@@ -7,24 +7,31 @@
 
 #include <iostream>
 #include <vector>
-#include <stack>
+#include <cstring>
+#include <algorithm>
+#include <cmath>
 
 class Calculator {
 
 public:
     double evaluate(std::string math_problem);
+    Calculator();
+    ~Calculator() = default;
 
 private:
+    const std::string VALID_OPERATORS[6] = {"root", "^", "/", "*", "-", "+"};
+    int number_of_operators;
+    bool are_operators_valid;
+    bool parenthesis_are_valid;
     std::vector<std::string> list_of_oprs;
     std::vector<double> numbers;
+
+    std::string handle_parentheses(std::string math_problem);
     std::string get_next_operator(std::string part);
-    std::string VALID_OPERATORS[6] = {"root", "^", "/", "*", "-", "+"};
-    int NUMBER_OF_OPERATORS = sizeof(VALID_OPERATORS)/sizeof(VALID_OPERATORS[0]);
     bool is_operator_valid(std::string op);
-    bool are_operators_valid = true;
     void solve(std::string op);
-    bool parenthesis_are_valid = true;
     void check_parenthesis(std::string math_problem);
+    void parse_math_problem(std::string math_problem);
 };
 
 
