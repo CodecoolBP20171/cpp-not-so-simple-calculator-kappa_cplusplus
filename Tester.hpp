@@ -24,7 +24,7 @@ public:
         TestComplicatedFormula_rootAndPower();
         TestErroneousFormula_rootTypoNoBrackets();
 
-/*
+
         // Boss fight
         TestComplicatedFormula_brackets();
         TestComplicatedFormula_bracketsBeforeRoot();
@@ -32,7 +32,7 @@ public:
         TestErroneousFormula_missingOpeningBracket();
         TestErroneousFormula_missingClosingBracket();
         TestErroneousFormula_missing_param();
-*/
+
         evaluateTestOutcomes();
     }
 
@@ -42,7 +42,7 @@ private:
     void TestAddition()
     {
         Calculator c;
-        double result = c.evaluate("10+2");
+        double result = c.evaluate("(10+2+(2-2))");
         checkResult(12, result);
     }
 

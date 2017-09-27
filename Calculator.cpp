@@ -13,6 +13,33 @@
 double Calculator::evaluate(std::string math_problem) {
     math_problem.erase(std::remove_if(begin(math_problem), end(math_problem), isspace), math_problem.end());
 
+    check_parenthesis(math_problem);
+    if(!parenthesis_are_valid){
+        std::cout << "Inalid parenthesis" << std::endl;
+        return 0;
+    }
+
+    bool exist_parent = true;
+    while(exist_parent) {
+        int open_par = -1;
+        int par_length = 0;
+        for (int i = 0; i < math_problem.length(); i++) {
+            if (math_problem[i] == '(') {
+                open_par = i;
+            } else if (math_problem[i] == ')') {
+                par_length = i-open_par;
+                double parenth_value = evaluate(math_problem.substr(open_par+1, par_length-1));
+                math_problem.replace(open_par, par_length+1, std::to_string(parenth_value));
+                numbers.clear();
+                break;
+            }
+        }
+        if(open_par == -1 && par_length == 0){
+            exist_parent = false;
+        }
+
+    }
+
     while (0 != math_problem.length() && are_operators_valid){
         std::string::size_type p;
         double next_nr = stod(math_problem, &p);
@@ -93,4 +120,17 @@ bool Calculator::is_operator_valid(std::string op){
         }
     }
     return false;
+}
+
+void Calculator::check_parenthesis(std::string mp) {
+    int pare_counter = 0;
+    for (int i = 0; i < mp.length(); i++) {
+        if (mp[i] == '(') {
+            pare_counter++;
+        } else if (mp[i] == ')') {
+            pare_counter--;
+        }
+    }
+    if(pare_counter == 0) parenthesis_are_valid = true;
+    else parenthesis_are_valid = false;
 }

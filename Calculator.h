@@ -23,7 +23,8 @@ private:
     bool is_operator_valid(std::string op);
     bool are_operators_valid = true;
     void solve(std::string op);
-
+    bool parenthesis_are_valid = true;
+    void check_parenthesis(std::string math_problem);
 };
 
 
