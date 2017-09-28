@@ -15,8 +15,6 @@ public:
         TestMultiplication();
         TestDivision();
         TestFormulaWithSpaces();
-        // Extras
-        TestDivisionByZero();
 
         // Level 1
         TestRoot();
@@ -26,9 +24,6 @@ public:
         TestComplicatedFormula_root();
         TestComplicatedFormula_rootAndPower();
         TestErroneousFormula_rootTypoNoBrackets();
-        // Extras
-        TestBackwardsBrackets();
-
 
         // Boss fight
         TestComplicatedFormula_brackets();
@@ -38,7 +33,19 @@ public:
         TestErroneousFormula_missingClosingBracket();
         TestErroneousFormula_missing_param();
 
+        // Extras
+        std::cout << "Extra tests:" << std::endl;
+        TestDivisionByZero();
+        TestEmptyFormula();
+        TestBackwardsBrackets();
+        TestNonMath();
+        TestNegativeNr();
+        TestNegativeWithBrackets();
+        TestSqrtOfNegative();
+        TestOnlyParentheses();
+
         evaluateTestOutcomes();
+
     }
 
 private:
@@ -47,8 +54,8 @@ private:
     void TestAddition()
     {
         Calculator c;
-        double result = c.evaluate("(10+2+(2-2))");
-        checkResult(12, result);
+        double result = c.evaluate("10+-2");
+        checkResult(8, result);
     }
 
     void TestSubtraction()
@@ -201,10 +208,47 @@ private:
 
     void TestBackwardsBrackets() {
         Calculator c;
-        double result = c.evaluate("())3+4(");
+        double result = c.evaluate(")3+4(");
         checkResult(0, result);
     };
+
+    void TestEmptyFormula(){
+        Calculator c;
+        double result = c.evaluate("");
+        checkResult(0, result);
+    }
+
+    void TestNonMath(){
+        Calculator c;
+        double result = c.evaluate("Asd(2+2)fasdfa");
+        checkResult(0, result);
+    }
+
+    void TestNegativeNr() {
+        Calculator c;
+        double result = c.evaluate("-2-3");
+        checkResult(-5, result);
+    }
+
+    void TestNegativeWithBrackets() {
+        Calculator c;
+        double result = c.evaluate("-2-(-1-2)");
+        checkResult(1, result);
+    }
+
+    void TestSqrtOfNegative() {
+        Calculator c;
+        double result = c.evaluate("2root-4");
+        checkResult(0, result);
+    }
+
+    void TestOnlyParentheses() {
+        Calculator c;
+        double result = c.evaluate("((()((()))()))");
+        checkResult(0, result);
+    }
 };
+
 
 
 #endif //CALCULATOR_TESTER_HPP

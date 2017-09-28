@@ -22,8 +22,8 @@ private:
     const std::string VALID_OPERATORS[6] = {"root", "^", "/", "*", "-", "+"};
     int number_of_operators;
     bool are_operators_valid;
-    bool parenthesis_are_valid;
     bool exists_div_by_zero;
+    bool result_is_complex_nr;
     std::vector<std::string> list_of_oprs;
     std::vector<double> numbers;
 
@@ -32,7 +32,7 @@ private:
     double calculate(std::string formula);
     bool is_operator_valid(std::string op);
     void solve(std::string op);
-    void check_parenthesis(std::string formula);
+    bool check_parenthesis(std::string formula);
     void parse_math_problem(std::string formula);
 
 };
