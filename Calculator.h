@@ -14,7 +14,7 @@
 class Calculator {
 
 public:
-    double evaluate(std::string math_problem);
+    double evaluate(std::string formula);
     Calculator();
     ~Calculator() = default;
 
@@ -26,12 +26,14 @@ private:
     std::vector<std::string> list_of_oprs;
     std::vector<double> numbers;
 
-    std::string handle_parentheses(std::string math_problem);
+    std::string handle_parentheses(std::string formula);
     std::string get_next_operator(std::string part);
+    double calculate(std::string formula);
     bool is_operator_valid(std::string op);
     void solve(std::string op);
-    void check_parenthesis(std::string math_problem);
-    void parse_math_problem(std::string math_problem);
+    void check_parenthesis(std::string formula);
+    void parse_math_problem(std::string formula);
+
 };
 
 

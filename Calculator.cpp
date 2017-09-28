@@ -10,27 +10,18 @@ Calculator::Calculator(){
     parenthesis_are_valid = true;
 }
 
-double Calculator::evaluate(std::string math_problem) {
-    math_problem.erase(std::remove_if(begin(math_problem), end(math_problem), isspace), math_problem.end());
+double Calculator::evaluate(std::string formula) {
+    formula.erase(std::remove_if(begin(formula), end(formula), isspace), formula.end());
 
-    check_parenthesis(math_problem); // make it return bool and assign here.
+    check_parenthesis(formula); // make it return bool and assign here.
     if(!parenthesis_are_valid){
         std::cout << "Invalid parenthesis" << std::endl;
         return 0;
     }
 
-    math_problem = handle_parentheses(math_problem);
-    parse_math_problem(math_problem);
+    formula = handle_parentheses(formula);
 
-    if(are_operators_valid){
-        for (int i = 0; i < number_of_operators; ++i) {
-            solve(VALID_OPERATORS[i]);
-        }
-        return numbers[0];
-    } else {
-        std::cout << "The problem contained one or more invalid operators." << std::endl;
-        return 0;
-    }
+    return calculate(formula);
 
     // TODO make a calculate function to avoid pointless re-checking.
     /*
@@ -110,19 +101,18 @@ void Calculator::check_parenthesis(std::string mp) {
     else parenthesis_are_valid = false;
 }
 
-std::string Calculator::handle_parentheses(std::string math_problem) {
-
+std::string Calculator::handle_parentheses(std::string formula) {
     bool exist_parent = true;
     while(exist_parent) {
         int open_par = -1;
         int par_length = 0;
-        for (int i = 0; i < math_problem.length(); i++) {
-            if (math_problem[i] == '(') {
+        for (int i = 0; i < formula.length(); i++) {
+            if (formula[i] == '(') {
                 open_par = i;
-            } else if (math_problem[i] == ')') {
+            } else if (formula[i] == ')') {
                 par_length = i-open_par;
-                double parenth_value = evaluate(math_problem.substr(open_par+1, par_length-1));
-                math_problem.replace(open_par, par_length+1, std::to_string(parenth_value));
+                double parenth_value = calculate(formula.substr(open_par+1, par_length-1));
+                formula.replace(open_par, par_length+1, std::to_string(parenth_value));
                 numbers.clear();
                 break;
             }
@@ -131,17 +121,31 @@ std::string Calculator::handle_parentheses(std::string math_problem) {
             exist_parent = false;
         }
     }
-    return math_problem;
+    return formula;
 }
 
-void Calculator::parse_math_problem(std::string math_problem) {
-    while (0 != math_problem.length() && are_operators_valid){
+void Calculator::parse_math_problem(std::string formula) {
+    while (0 != formula.length() && are_operators_valid){
         std::string::size_type p;
-        double next_nr = stod(math_problem, &p);
-        math_problem = math_problem.substr(p);
+        double next_nr = stod(formula, &p);
+        formula = formula.substr(p);
         numbers.push_back(next_nr);
 
-        math_problem = get_next_operator(math_problem);
+        formula = get_next_operator(formula);
     }
 
+}
+
+double Calculator::calculate(std::string formula) {
+    parse_math_problem(formula);
+
+    if(are_operators_valid){
+        for (int i = 0; i < number_of_operators; ++i) {
+            solve(VALID_OPERATORS[i]);
+        }
+        return numbers[0];
+    } else {
+        std::cout << "The problem contained one or more invalid operators." << std::endl;
+        return 0;
+    }
 }
