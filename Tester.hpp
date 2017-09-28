@@ -5,6 +5,7 @@ using namespace std;
 
 class Tester {
 public:
+
     void run()
     {
         failedTests = 0;
@@ -14,6 +15,8 @@ public:
         TestMultiplication();
         TestDivision();
         TestFormulaWithSpaces();
+        // Extras
+        TestDivisionByZero();
 
         // Level 1
         TestRoot();
@@ -23,6 +26,8 @@ public:
         TestComplicatedFormula_root();
         TestComplicatedFormula_rootAndPower();
         TestErroneousFormula_rootTypoNoBrackets();
+        // Extras
+        TestBackwardsBrackets();
 
 
         // Boss fight
@@ -185,6 +190,20 @@ private:
             cout << "All tests passed!" << endl;
         }
     }
+
+    // Extra
+
+    void TestDivisionByZero() {
+        Calculator c;
+        double result = c.evaluate("5/0");
+        checkResult(0, result);
+    }
+
+    void TestBackwardsBrackets() {
+        Calculator c;
+        double result = c.evaluate("())3+4(");
+        checkResult(0, result);
+    };
 };
 
 

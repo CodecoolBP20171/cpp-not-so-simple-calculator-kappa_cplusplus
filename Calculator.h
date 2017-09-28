@@ -23,6 +23,7 @@ private:
     int number_of_operators;
     bool are_operators_valid;
     bool parenthesis_are_valid;
+    bool exists_div_by_zero;
     std::vector<std::string> list_of_oprs;
     std::vector<double> numbers;
 
